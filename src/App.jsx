@@ -1,122 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+// un file JS/JSX che comincia con una lettera maiuscola (o che genericamente segue la nomenclatura
+// PascalCase) è un COMPONENTE REACT!
+// Un componente REACT ha estensione .js/.jsx
+
+// Un componente React è un frammento di interfaccia.
+// Può venire scritto in due formule: come CLASSE o come FUNZIONE.
+// La formula più semplice è quella descritta in questo file: una funzione che ritorna del contenuto.
+// Questo contenuto viene sempre scritto in una sintassi molto simile ad HTML chiamata JSX.
+// JSX è retrocompatibile con HTML ma con delle agevolazione per l'interpolazione di JS.
+// Inserendo un paio di graffe { } è possibile interpolare facilmente del JS all'interno della struttura.
+// In aggiunta, alcuni nomi di attributi HTML non sono validi in un file JSX come questo:
+// class -> className
+// for -> htmlFor
+// etc.
+// Tutti gli event listener diventano in camelCase:
+// onclick -> onClick
+// onsubmit -> onSubmit
+// etc.
+
 import './App.css'
+import List from './components/List'
+// come inserisco Title dentro App?
+// prima serve un import:
+import Title from './components/Title'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = function () {
+  // la regola dice che un'espressione JSX (come il valore di un return) può contenere UN SOLO VALORE
+  // <> è un contenitore "virtuale" vuoto, che serve solamente a far rispettare la regola che
+  // il return deve avere un solo valore! si chiama REACT FRAGMENT
   return (
+    // Un componente si ripete ad ogni invocazione in tutto il suo contenuto.
+    // Spessissimo però capita che un componente debba contenere al suo interno delle parti "dinamiche",
+    // cioè delle porzioni di: contenuto, stile, logica etc. che possano variare da invocazione a invocazione
+    // per ottenere questo risultato si fornisce al componente dei "parametri"; vengono chiamati PROPS.
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                Stefano
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Robespierre
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <Title name="Alessia" />
+      <Title name="Gianni" />
+      <Title name="Roberto" numero={100} />
+      {/* se il valore della prop è stringa si mettono le virgolette, in ogni altro caso le {} */}
+      <List item="Scottex" />
+      <List item="Tappetino Mouse" />
+      <List item="Poggiatazza" />
     </>
   )
 }
 
 export default App
+
+// al termine di ogni file JSX è necessario ESPORTARE il componente React definito, in modo da
+// renderlo disponibile all'interno dell'app Vite negli altri file/componenti
+
+// la struttura import/export della nostra app Vite funziona così: un componente viene scritto ed
+// esportato, in modo che un altro componente o file lo possa importare

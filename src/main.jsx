@@ -14,3 +14,5 @@ createRoot(document.getElementById('root')).render(<App />)
 
 // La riga 6 prende un riferimento dal DOM (quel div vuoto con id="root" presente in index.html)
 // e su questa base monta <App />, un componente React!
+
+// App è il componente PRINCIPALE della vostra applicazione.
